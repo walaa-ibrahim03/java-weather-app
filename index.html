@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Weather App Learning Hub</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f7fb;
+    margin:0;
+    padding:30px;
+    color:#333;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    color:#1565c0;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin:20px 0;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+button{
+    background:#1565c0;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0d47a1;
+}
+
+.hidden{
+    display:none;
+}
+
+pre{
+    background:#272822;
+    color:#f8f8f2;
+    padding:15px;
+    border-radius:8px;
+    overflow:auto;
+}
+
+.quiz-btn{
+    margin:5px;
+}
+
+.correct{
+    color:green;
+    font-weight:bold;
+}
+
+.wrong{
+    color:red;
+    font-weight:bold;
+}
+
+.progress{
+    width:100%;
+    background:#ddd;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:25px;
+    width:0%;
+    background:#4caf50;
+    text-align:center;
+    color:white;
+    line-height:25px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Java Weather App Learning Hub</h1>
+
+<div class="progress">
+<div class="progress-bar" id="progressBar">0%</div>
+</div>
+
+<div class="card">
+<h2>Project Goal</h2>
+
+<p>
+Build a Weather App while learning:
+</p>
+
+<ul>
+<li>Java Fundamentals</li>
+<li>Object-Oriented Programming (OOP)</li>
+<li>GUI Development</li>
+<li>Event Handling</li>
+<li>API Integration (Later)</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Class vs Object</h2>
+
+<p><b>Class</b> = Blueprint</p>
+<p><b>Object</b> = Real thing created from the blueprint</p>
+
+<pre>
+Class = House Blueprint
+
+Object = Actual House
+</pre>
+
+<button onclick="toggle('classSection')">
+Show Example
+</button>
+
+<div id="classSection" class="hidden">
+<pre>
+public class WeatherFrame {
+
+}
+
+new WeatherFrame();
+</pre>
+</div>
+</div>
+
+<div class="card">
+<h2>Local Variable</h2>
+
+<pre>
+public WeatherFrame() {
+
+    JTextField cityField =
+    new JTextField(15);
+
+}
+</pre>
+
+<p>
+Lives only inside the constructor.
+</p>
+</div>
+
+<div class="card">
+<h2>Instance Variable</h2>
+
+<pre>
+public class WeatherFrame {
+
+    private JTextField cityField;
+
+}
+</pre>
+
+<p>
+Lives as long as the object exists.
+</p>
+
+<button onclick="toggle('instanceSection')">
+Why Is This Better?
+</button>
+
+<div id="instanceSection" class="hidden">
+
+<pre>
+private void clearField() {
+
+    cityField.setText("");
+
+}
+</pre>
+
+<p>
+Any method can access cityField.
+</p>
+
+</div>
+</div>
+
+<div class="card">
+<h2>getText()</h2>
+
+<input id="cityInput"
+placeholder="Type a city">
+
+<button onclick="showText()">
+Run getText()
+</button>
+
+<p id="getTextResult"></p>
+
+</div>
+
+<div class="card">
+<h2>setText()</h2>
+
+<p id="setTextLabel">
+Weather will appear here
+</p>
+
+<button onclick="setExample()">
+Run setText()
+</button>
+
+</div>
+
+<div class="card">
+<h2>ActionListener</h2>
+
+<p>
+Click the button to simulate a Java button event.
+</p>
+
+<button onclick="simulateEvent()">
+Get Weather
+</button>
+
+<p id="eventResult"></p>
+
+</div>
+
+<div class="card">
+<h2>Mini Quiz</h2>
+
+<h3>
+Where is an Instance Variable declared?
+</h3>
+
+<button class="quiz-btn"
+onclick="checkAnswer(false)">
+Inside Constructor
+</button>
+
+<button class="quiz-btn"
+onclick="checkAnswer(true)">
+Inside Class
+</button>
+
+<p id="quizResult"></p>
+
+</div>
+
+<div class="card">
+<h2>Current Learning Progress</h2>
+
+<ul>
+<li>✅ JFrame</li>
+<li>✅ JLabel</li>
+<li>✅ JTextField</li>
+<li>✅ JButton</li>
+<li>✅ FlowLayout</li>
+<li>✅ ActionListener</li>
+<li>✅ getText()</li>
+<li>✅ setText()</li>
+<li>✅ Local Variables</li>
+<li>✅ Instance Variables</li>
+<li>⏳ Methods</li>
+<li>⏳ Refactoring</li>
+<li>⏳ Weather API</li>
+</ul>
+</div>
+
+</div>
+
+<script>
+
+let progress = 70;
+document.getElementById("progressBar").style.width =
+progress + "%";
+document.getElementById("progressBar").innerText =
+progress + "%";
+
+function toggle(id){
+    document
+    .getElementById(id)
+    .classList
+    .toggle("hidden");
+}
+
+function showText(){
+
+    let city =
+    document.getElementById("cityInput").value;
+
+    document.getElementById(
+    "getTextResult")
+    .innerText =
+    "getText() returned: " + city;
+}
+
+function setExample(){
+
+    document.getElementById(
+    "setTextLabel")
+    .innerText =
+    "Searching weather for New York";
+}
+
+function simulateEvent(){
+
+    document.getElementById(
+    "eventResult")
+    .innerText =
+    "Button clicked! ActionListener executed.";
+}
+
+function checkAnswer(correct){
+
+    let result =
+    document.getElementById(
+    "quizResult");
+
+    if(correct){
+
+        result.innerHTML =
+        "<span class='correct'>Correct! Instance Variables are declared inside the class.</span>";
+
+    }else{
+
+        result.innerHTML =
+        "<span class='wrong'>Incorrect. Try again.</span>";
+    }
+}
+
+</script>
+
+</body>
+</html>
