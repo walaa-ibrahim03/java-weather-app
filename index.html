@@ -1,345 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Java Weather App Learning Hub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Java Weather App Learning Guide</title>
 
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background:#f4f7fb;
-    margin:0;
-    padding:30px;
-    color:#333;
-}
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --green: #16a34a;
+      --yellow: #f59e0b;
+      --red: #dc2626;
+      --code-bg: #111827;
+      --code-text: #e5e7eb;
+      --border: #e5e7eb;
+    }
 
-.container{
-    max-width:1000px;
-    margin:auto;
-}
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-h1{
-    text-align:center;
-    color:#1565c0;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
 
-.card{
-    background:white;
-    padding:20px;
-    margin:20px 0;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
+    header {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+    }
 
-button{
-    background:#1565c0;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:8px;
-    cursor:pointer;
-}
+    header h1 {
+      font-size: 44px;
+      margin-bottom: 15px;
+    }
 
-button:hover{
-    background:#0d47a1;
-}
+    header p {
+      max-width: 850px;
+      margin: auto;
+      font-size: 20px;
+      opacity: 0.95;
+    }
 
-.hidden{
-    display:none;
-}
+    nav {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 12px;
+      text-align: center;
+      z-index: 10;
+    }
 
-pre{
-    background:#272822;
-    color:#f8f8f2;
-    padding:15px;
-    border-radius:8px;
-    overflow:auto;
-}
+    nav a {
+      margin: 8px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-.quiz-btn{
-    margin:5px;
-}
+    section {
+      max-width: 1100px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
 
-.correct{
-    color:green;
-    font-weight:bold;
-}
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
 
-.wrong{
-    color:red;
-    font-weight:bold;
-}
+    h2 {
+      color: var(--primary);
+      margin-top: 0;
+    }
 
-.progress{
-    width:100%;
-    background:#ddd;
-    border-radius:10px;
-    overflow:hidden;
-}
+    h3 {
+      margin-top: 30px;
+    }
 
-.progress-bar{
-    height:25px;
-    width:0%;
-    background:#4caf50;
-    text-align:center;
-    color:white;
-    line-height:25px;
-}
-</style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .mini {
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    code, pre {
+      font-family: Consolas, monospace;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 18px;
+      border-radius: 14px;
+      overflow-x: auto;
+      font-size: 14px;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      margin: 25px 0;
+    }
+
+    .step {
+      background: var(--primary-soft);
+      color: #1e40af;
+      padding: 15px 20px;
+      border-radius: 14px;
+      font-weight: bold;
+      min-width: 150px;
+      text-align: center;
+    }
+
+    .arrow {
+      font-size: 28px;
+      color: var(--muted);
+    }
+
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .quiz-option {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      text-align: left;
+      background: #eef2ff;
+      color: var(--text);
+    }
+
+    .correct {
+      background: #dcfce7 !important;
+      color: #166534 !important;
+    }
+
+    .wrong {
+      background: #fee2e2 !important;
+      color: #991b1b !important;
+    }
+
+    .output {
+      background: #f3f4f6;
+      border-left: 5px solid var(--primary);
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>
+  <h1>Java Weather App Learning Guide</h1>
+  <p>
+    A beginner-friendly visual guide that teaches Java, Swing, HTTP, JSON, parsing,
+    APIs, and object-oriented programming through a real Weather Information App.
+  </p>
+</header>
 
-<h1>Java Weather App Learning Hub</h1>
+<nav>
+  <a href="#intro">Start</a>
+  <a href="#java">Java Basics</a>
+  <a href="#oop">OOP</a>
+  <a href="#http">HTTP</a>
+  <a href="#json">JSON</a>
+  <a href="#parsing">Parsing</a>
+  <a href="#project">Project Flow</a>
+  <a href="#quiz">Quiz</a>
+</nav>
 
-<div class="progress">
-<div class="progress-bar" id="progressBar">0%</div>
-</div>
+<section id="intro">
+  <div class="card">
+    <h2>1. What Are We Building?</h2>
+    <p>
+      We are building a desktop application using Java. The user enters a city name,
+      the program sends a request to an online weather API, receives weather data,
+      reads the data, and displays it in a simple graphical window.
+    </p>
 
-<div class="card">
-<h2>Project Goal</h2>
+    <div class="flow">
+      <div class="step">User enters city</div>
+      <div class="arrow">→</div>
+      <div class="step">Java sends HTTP request</div>
+      <div class="arrow">→</div>
+      <div class="step">API returns JSON</div>
+      <div class="arrow">→</div>
+      <div class="step">Java parses JSON</div>
+      <div class="arrow">→</div>
+      <div class="step">GUI shows weather</div>
+    </div>
+  </div>
+</section>
 
-<p>
-Build a Weather App while learning:
-</p>
+<section id="java">
+  <div class="card">
+    <h2>2. Java Basics</h2>
+    <p>
+      Java is a programming language used to build desktop apps, web apps, Android apps,
+      enterprise systems, and backend services.
+    </p>
 
-<ul>
-<li>Java Fundamentals</li>
-<li>Object-Oriented Programming (OOP)</li>
-<li>GUI Development</li>
-<li>Event Handling</li>
-<li>API Integration (Later)</li>
-</ul>
-</div>
+    <div class="grid">
+      <div class="mini">
+        <h3>Class</h3>
+        <p>A class is a blueprint.</p>
+        <pre>public class WeatherApp {
+}</pre>
+      </div>
 
-<div class="card">
-<h2>Class vs Object</h2>
+      <div class="mini">
+        <h3>Object</h3>
+        <p>An object is a real thing created from a class.</p>
+        <pre>WeatherService service = new WeatherService();</pre>
+      </div>
 
-<p><b>Class</b> = Blueprint</p>
-<p><b>Object</b> = Real thing created from the blueprint</p>
+      <div class="mini">
+        <h3>Method</h3>
+        <p>A method is an action.</p>
+        <pre>public void fetchWeather() {
+}</pre>
+      </div>
 
-<pre>
-Class = House Blueprint
+      <div class="mini">
+        <h3>Variable</h3>
+        <p>A variable stores data.</p>
+        <pre>String city = "London";</pre>
+      </div>
+    </div>
+  </div>
+</section>
 
-Object = Actual House
-</pre>
+<section id="oop">
+  <div class="card">
+    <h2>3. Object-Oriented Programming</h2>
+    <p>
+      OOP means organizing code into classes. Each class has a clear job.
+    </p>
 
-<button onclick="toggle('classSection')">
-Show Example
-</button>
+    <div class="grid">
+      <div class="mini">
+        <h3>WeatherApp</h3>
+        <p>Starts the application.</p>
+      </div>
 
-<div id="classSection" class="hidden">
-<pre>
-public class WeatherFrame {
+      <div class="mini">
+        <h3>WeatherFrame</h3>
+        <p>Builds the GUI window.</p>
+      </div>
 
+      <div class="mini">
+        <h3>WeatherService</h3>
+        <p>Talks to the weather API.</p>
+      </div>
+
+      <div class="mini">
+        <h3>WeatherParser</h3>
+        <p>Reads JSON and extracts values.</p>
+      </div>
+
+      <div class="mini">
+        <h3>WeatherData</h3>
+        <p>Stores temperature, humidity, wind, and forecast.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="http">
+  <div class="card">
+    <h2>4. What Is HTTP?</h2>
+    <p>
+      HTTP means <strong>HyperText Transfer Protocol</strong>.
+      It is the language browsers and programs use to communicate with websites and APIs.
+    </p>
+
+    <p>When Java asks the weather API for data, it sends an HTTP request.</p>
+
+    <pre>
+HttpRequest request =
+    HttpRequest.newBuilder()
+        .uri(URI.create(url))
+        .GET()
+        .build();
+    </pre>
+
+    <div class="flow">
+      <div class="step">Java App</div>
+      <div class="arrow">→ HTTP Request →</div>
+      <div class="step">Weather API</div>
+      <div class="arrow">→ HTTP Response →</div>
+      <div class="step">JSON Data</div>
+    </div>
+  </div>
+</section>
+
+<section id="json">
+  <div class="card">
+    <h2>5. What Is JSON?</h2>
+    <p>
+      JSON means <strong>JavaScript Object Notation</strong>.
+      It is a lightweight format used to store and transfer data.
+    </p>
+
+    <p>JSON looks like this:</p>
+
+    <pre>
+{
+  "temperature": 28.7,
+  "humidity": 32,
+  "wind_speed": 6.0,
+  "condition": "Clear sky"
 }
+    </pre>
 
-new WeatherFrame();
-</pre>
-</div>
-</div>
+    <p>
+      Think of JSON like a labeled box. Each label has a value.
+    </p>
 
-<div class="card">
-<h2>Local Variable</h2>
+    <div class="grid">
+      <div class="mini">
+        <h3>Key</h3>
+        <p><code>"temperature"</code></p>
+      </div>
 
-<pre>
-public WeatherFrame() {
+      <div class="mini">
+        <h3>Value</h3>
+        <p><code>28.7</code></p>
+      </div>
 
-    JTextField cityField =
-    new JTextField(15);
+      <div class="mini">
+        <h3>String Value</h3>
+        <p><code>"Clear sky"</code></p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="parsing">
+  <div class="card">
+    <h2>6. What Is Parsing?</h2>
+    <p>
+      Parsing means reading raw data and extracting the useful parts.
+    </p>
+
+    <p>Raw JSON:</p>
+
+    <pre>
+{
+  "current": {
+    "temperature_2m": 83.6,
+    "relative_humidity_2m": 32,
+    "wind_speed_10m": 3.7
+  }
 }
-</pre>
+    </pre>
 
-<p>
-Lives only inside the constructor.
-</p>
-</div>
+    <p>Java parsing with Jackson:</p>
 
-<div class="card">
-<h2>Instance Variable</h2>
+    <pre>
+JsonNode root = mapper.readTree(json);
 
-<pre>
-public class WeatherFrame {
+double temperature =
+    root.get("current")
+        .get("temperature_2m")
+        .asDouble();
+    </pre>
 
-    private JTextField cityField;
+    <div class="output">
+Result:
+Temperature = 83.6
+    </div>
+  </div>
+</section>
 
-}
-</pre>
+<section id="project">
+  <div class="card">
+    <h2>7. Full Project Flow</h2>
 
-<p>
-Lives as long as the object exists.
-</p>
+    <div class="flow">
+      <div class="step">City Name</div>
+      <div class="arrow">→</div>
+      <div class="step">Geocoding API</div>
+      <div class="arrow">→</div>
+      <div class="step">Latitude + Longitude</div>
+      <div class="arrow">→</div>
+      <div class="step">Weather API</div>
+      <div class="arrow">→</div>
+      <div class="step">Weather JSON</div>
+      <div class="arrow">→</div>
+      <div class="step">WeatherData Object</div>
+      <div class="arrow">→</div>
+      <div class="step">Swing GUI</div>
+    </div>
 
-<button onclick="toggle('instanceSection')">
-Why Is This Better?
-</button>
+    <h3>Why do we need latitude and longitude?</h3>
+    <p>
+      Weather APIs usually need exact coordinates, not just a city name.
+      So the app first converts the city name into coordinates.
+    </p>
 
-<div id="instanceSection" class="hidden">
+    <pre>
+London
+→ latitude: 51.5085
+→ longitude: -0.1257
+    </pre>
+  </div>
+</section>
 
-<pre>
-private void clearField() {
+<section>
+  <div class="card">
+    <h2>8. Interactive Mini Demo</h2>
+    <p>Type a city and see how the app thinks internally.</p>
 
-    cityField.setText("");
+    <input id="cityInput" placeholder="Enter a city, e.g. London" style="padding:12px;width:70%;border-radius:10px;border:1px solid #ccc;">
+    <button onclick="simulateApp()">Simulate</button>
 
-}
-</pre>
+    <div id="demoOutput" class="output" style="margin-top:20px;"></div>
+  </div>
+</section>
 
-<p>
-Any method can access cityField.
-</p>
+<section id="quiz">
+  <div class="card">
+    <h2>9. Quick Quiz</h2>
 
-</div>
-</div>
+    <h3>Question 1: What does JSON stand for?</h3>
+    <button class="quiz-option" onclick="check(this, false)">Java Source Object Network</button>
+    <button class="quiz-option" onclick="check(this, true)">JavaScript Object Notation</button>
+    <button class="quiz-option" onclick="check(this, false)">Java System Online Node</button>
 
-<div class="card">
-<h2>getText()</h2>
+    <h3>Question 2: What does parsing mean?</h3>
+    <button class="quiz-option" onclick="check(this, false)">Deleting code</button>
+    <button class="quiz-option" onclick="check(this, true)">Reading data and extracting useful values</button>
+    <button class="quiz-option" onclick="check(this, false)">Changing screen color</button>
 
-<input id="cityInput"
-placeholder="Type a city">
+    <h3>Question 3: Which class talks to the API?</h3>
+    <button class="quiz-option" onclick="check(this, false)">WeatherData</button>
+    <button class="quiz-option" onclick="check(this, true)">WeatherService</button>
+    <button class="quiz-option" onclick="check(this, false)">WeatherApp</button>
+  </div>
+</section>
 
-<button onclick="showText()">
-Run getText()
-</button>
+<section>
+  <div class="card">
+    <h2>10. Final Summary</h2>
+    <p>
+      This project teaches a complete real-world programming cycle:
+    </p>
 
-<p id="getTextResult"></p>
+    <ul>
+      <li>Build a graphical interface with Java Swing.</li>
+      <li>Send HTTP requests using Java HttpClient.</li>
+      <li>Receive JSON data from an API.</li>
+      <li>Parse JSON using Jackson.</li>
+      <li>Store data inside a model class.</li>
+      <li>Display clean results to the user.</li>
+      <li>Save search history to a file.</li>
+    </ul>
+  </div>
+</section>
 
-</div>
-
-<div class="card">
-<h2>setText()</h2>
-
-<p id="setTextLabel">
-Weather will appear here
-</p>
-
-<button onclick="setExample()">
-Run setText()
-</button>
-
-</div>
-
-<div class="card">
-<h2>ActionListener</h2>
-
-<p>
-Click the button to simulate a Java button event.
-</p>
-
-<button onclick="simulateEvent()">
-Get Weather
-</button>
-
-<p id="eventResult"></p>
-
-</div>
-
-<div class="card">
-<h2>Mini Quiz</h2>
-
-<h3>
-Where is an Instance Variable declared?
-</h3>
-
-<button class="quiz-btn"
-onclick="checkAnswer(false)">
-Inside Constructor
-</button>
-
-<button class="quiz-btn"
-onclick="checkAnswer(true)">
-Inside Class
-</button>
-
-<p id="quizResult"></p>
-
-</div>
-
-<div class="card">
-<h2>Current Learning Progress</h2>
-
-<ul>
-<li>✅ JFrame</li>
-<li>✅ JLabel</li>
-<li>✅ JTextField</li>
-<li>✅ JButton</li>
-<li>✅ FlowLayout</li>
-<li>✅ ActionListener</li>
-<li>✅ getText()</li>
-<li>✅ setText()</li>
-<li>✅ Local Variables</li>
-<li>✅ Instance Variables</li>
-<li>⏳ Methods</li>
-<li>⏳ Refactoring</li>
-<li>⏳ Weather API</li>
-</ul>
-</div>
-
-</div>
+<footer>
+  Built as an educational Java learning reference for beginner students.
+</footer>
 
 <script>
+  function simulateApp() {
+    const city = document.getElementById("cityInput").value.trim();
+    const output = document.getElementById("demoOutput");
 
-let progress = 70;
-document.getElementById("progressBar").style.width =
-progress + "%";
-document.getElementById("progressBar").innerText =
-progress + "%";
-
-function toggle(id){
-    document
-    .getElementById(id)
-    .classList
-    .toggle("hidden");
-}
-
-function showText(){
-
-    let city =
-    document.getElementById("cityInput").value;
-
-    document.getElementById(
-    "getTextResult")
-    .innerText =
-    "getText() returned: " + city;
-}
-
-function setExample(){
-
-    document.getElementById(
-    "setTextLabel")
-    .innerText =
-    "Searching weather for New York";
-}
-
-function simulateEvent(){
-
-    document.getElementById(
-    "eventResult")
-    .innerText =
-    "Button clicked! ActionListener executed.";
-}
-
-function checkAnswer(correct){
-
-    let result =
-    document.getElementById(
-    "quizResult");
-
-    if(correct){
-
-        result.innerHTML =
-        "<span class='correct'>Correct! Instance Variables are declared inside the class.</span>";
-
-    }else{
-
-        result.innerHTML =
-        "<span class='wrong'>Incorrect. Try again.</span>";
+    if (!city) {
+      output.textContent = "Step 1 failed: Please enter a city name.";
+      return;
     }
-}
 
+    if (/^\d+$/.test(city)) {
+      output.textContent =
+        "Validation stopped the request.\n\nNumbers are not valid city names.\nPlease enter a real city.";
+      return;
+    }
+
+    output.textContent =
+`Step 1: User entered city:
+${city}
+
+Step 2: Java sends request to Geocoding API.
+
+Step 3: API returns latitude and longitude.
+
+Step 4: Java sends second request to Weather API.
+
+Step 5: API returns JSON weather data.
+
+Step 6: Jackson parses JSON.
+
+Step 7: WeatherData object stores:
+- temperature
+- humidity
+- wind speed
+- weather condition
+- forecast
+
+Step 8: Swing GUI displays the result.`;
+  }
+
+  function check(button, isCorrect) {
+    if (isCorrect) {
+      button.classList.add("correct");
+      button.textContent = "Correct: " + button.textContent;
+    } else {
+      button.classList.add("wrong");
+      button.textContent = "Try again: " + button.textContent;
+    }
+  }
 </script>
 
 </body>
