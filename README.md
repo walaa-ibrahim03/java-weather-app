@@ -1,32 +1,37 @@
-# Java Weather App
+# Weather Information App
 
-## Overview
-
-A beginner Java Swing application created to practice GUI development and event-driven programming.
+A Java Swing desktop application that provides real-time weather information using the Open-Meteo API.
 
 ## Features
 
-- User enters a city name
-- Button click handling
-- Dynamic label updates
-- Java Swing graphical user interface
+- Search weather by city
+- Current temperature
+- Humidity
+- Wind speed
+- Weather condition
+- 3-day forecast
+- Celsius / Fahrenheit conversion
+- Search history
+- Save history to text file
+- Dynamic background colors
+- JSON parsing with Jackson
 
-## Technologies
+## Technologies Used
 
 - Java 21
 - Java Swing
-- Eclipse IDE
+- Open-Meteo API
+- Jackson Databind
+- Object-Oriented Programming (OOP)
 
 ## Project Structure
 
-WeatherApp.java - Application entry point
+- WeatherApp.java
+- WeatherFrame.java
+- WeatherService.java
+- WeatherParser.java
+- WeatherData.java
 
-WeatherFrame.java - GUI and event handling
+## Author
 
-## Future Improvements
-
-- Connect to a real weather API
-- Display temperature
-- Display weather conditions
-- Add weather icons
-- Search history
+Walaa Ibrahim
